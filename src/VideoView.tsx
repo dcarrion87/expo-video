@@ -60,11 +60,24 @@ export class VideoView extends PureComponent<VideoViewProps> {
     return await this.nativeRef.current?.stopPictureInPicture();
   }
 
-  render(): ReactNode {
-    const { player, ...props } = this.props;
-    const playerId = getPlayerId(player);
+    /**
+     * Custom touch event handler that calls both onTouchEndCapture and onCustomTouchEndCapture
+     */
+    handleTouchEndCapture = (event) => {
+      const { onTouchEndCapture, onCustomTouchEndCapture } = this.props;
 
-    return <NativeVideoView {...props} player={playerId} ref={this.nativeRef} />;
+      if (onTouchEndCapture) {
+          onTouchEndCapture(event);
+      }
+      if (onCustomTouchEndCapture) {
+          onCustomTouchEndCapture(event);
+      }
+  };
+
+  render(): ReactNode {
+    const { player, onCustomTouchEndCapture, onTouchEndCapture, ...props } = this.props;
+    const playerId = getPlayerId(player);
+    return <NativeVideoView {...props} player={playerId} ref={this.nativeRef} onTouchEndCapture={this.handleTouchEndCapture} onCustomTouchEndCapture={this.handleTouchEndCapture}/>;
   }
 }
 

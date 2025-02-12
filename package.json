@@ -18,8 +18,7 @@
   "homepage": "https://docs.expo.dev/versions/latest/sdk/video/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/expo/expo.git",
-    "directory": "packages/expo-video"
+    "url": "https://github.com/dcarrion87/expo-video"
   },
   "keywords": [
     "react-native",
@@ -31,12 +30,10 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "expo-module-scripts": "^4.0.3"
-  },
-  "peerDependencies": {
+    "expo-module-scripts": "^4.0.3",
     "expo": "*",
     "react": "*",
-    "react-native": "*"
-  },
-  "gitHead": "986a4689b91f3efc527f7178a320b987c0005842"
+    "react-native": "*",
+    "@types/react": "*"
+  }
 }

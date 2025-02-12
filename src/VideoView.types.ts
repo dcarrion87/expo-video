@@ -113,4 +113,9 @@ export interface VideoViewProps extends ViewProps {
    * A callback to call after the video player exits fullscreen mode.
    */
   onFullscreenExit?: () => void;
+
+  /**
+   * A custom touch end capture event handler.
+   */
+  onCustomTouchEndCapture?: (event: any) => void;
 }

@@ -45,7 +45,8 @@ class VideoModule : Module() {
         "onPictureInPictureStart",
         "onPictureInPictureStop",
         "onFullscreenEnter",
-        "onFullscreenExit"
+        "onFullscreenExit",
+        "onCustomTouchEndCapture"
       )
 
       Prop("player") { view: VideoView, player: VideoPlayer ->

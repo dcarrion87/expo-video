@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Rational
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -34,6 +35,7 @@ class VideoView(context: Context, appContext: AppContext) : ExpoView(context, ap
   val onPictureInPictureStop by EventDispatcher<Unit>()
   val onFullscreenEnter by EventDispatcher<Unit>()
   val onFullscreenExit by EventDispatcher<Unit>()
+  val onCustomTouchEndCapture by EventDispatcher<Unit>()
 
   var willEnterPiP: Boolean = false
 
@@ -218,6 +220,19 @@ class VideoView(context: Context, appContext: AppContext) : ExpoView(context, ap
     rootViewChildrenOriginalVisibility.clear()
     this.addView(playerView)
   }
+
+override fun onTouchEvent(event: MotionEvent): Boolean {
+    when (event.action) {
+        MotionEvent.ACTION_DOWN -> {
+            return true  // Consume the event so ACTION_UP gets triggered
+        }
+        MotionEvent.ACTION_UP -> {
+            onCustomTouchEndCapture(Unit)
+            return true
+        }
+    }
+    return super.onTouchEvent(event)
+}
 
   override fun onTracksChanged(player: VideoPlayer, tracks: Tracks) {
     showsSubtitlesButton = player.subtitles.availableSubtitleTracks.isNotEmpty()
